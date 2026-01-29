@@ -79,6 +79,12 @@ df = (
 )
 ```
 ## 4 Conceptos Básicos
+En PySpark existen dos tipos de operaciones:
+- Transformaciones: operación que define un nuevo DataFrame o RDD a partir de otro, pero no ejecuta nada todavía. Spark solo construye un plan de ejecución.
+- Acciones: operación que ejecuta realmente el plan de Spark y devuelve un resultado concreto (como contar filas, mostrar datos, guardar archivos, etc.).
+
+Uno de los aspectos más importantes de Spark es “perezoso” (lazy evaluation). Cuando se realizá transformaciones, Spark no procesa los datos aún, solo los registra en un grafo de ejecución. Cuando se realizá la acción, Spark procesa todas las transformaciones necesarias para producir el resultado.
+
 ## 5 Transformaciones
 
 
