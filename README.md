@@ -43,7 +43,7 @@ Un DataFrame de PySpark es un conjunto distribuido de datos organizados en colum
 - Soporta SQL: Puedes ejecutar consultas SQL directamente sobre DataFrames.
 
 Existen varias formas de crear un dataframe pero la más común es la siguiente:
-```
+```python
 df = (
     spark.read.format("csv/json/...")
         .option(...)
@@ -54,11 +54,11 @@ df = (
 En la instrucción read.format() se idica el formato de tabla que queremos leer. Existen numerosas opciones. Dependiedo del formato elegido existirán diferentes posibilidades en la instrucción .option(), por ejemplo, epara los ficheros de tipo csv se suele utilizar .option("header", "true") y .option("inferSchema", "true"). Las diferentes posibilidades se pueden consultar en la docuentación oficial de pyspark: https://spark.apache.org/docs/latest/sql-data-sources.html. La instrucción load es la encargada de crear el dataframe y dy en la que se indica la ruta del fichero base.
 
 Otra de las formas más comunes crear una dataframe es desde una tabla de pyspark:
-```
+```python
 df = spark.table("table_path")
 ```
 Siempre que creamos un dataframe se recomienda definir un schema para evitar errores y acelerar la carga de datos. La definición de los Schemas se hace de la siguiente forma:
-```
+```python
 from pyspark.sql.types import StringType, LongType, IntegerType, DateType, StructType, StructField
 
 df_schema = StructType([
@@ -70,7 +70,7 @@ df_schema = StructType([
 ])
 ```
 Como podemos ver en el ejemplo primero es importar los tipos qu necesitamos para nuestro schema y a continuación defiimos nuestro schema. Debemos incluir el schema en la creación de nuestro dataframe:
-```
+```python
 df = (
     spark.read.format("csv/json/...")
         .option(...)
