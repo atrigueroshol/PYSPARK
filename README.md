@@ -1,5 +1,5 @@
 # Cheat Sheet PYSPARK 4.1.0
-![Texto alternativo](url)
+![Texto alternativo]([url](https://github.com/atrigueroshol/PYSPARK/blob/main/pyspark_logo.jpg))
 
 ## 1. Introducción
 PySpark es la interfaz oficial de Apache Spark para el lenguaje de programación Python, que permite desarrollar aplicaciones de procesamiento y análisis de datos a gran escala mediante un modelo de computación distribuida en memoria.
