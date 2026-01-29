@@ -51,7 +51,7 @@ df = (
         .load(path="/Volumes/.../.../file.csv")
 )
 ```
-En la instrucción read.format() se idica el formato de tabla que queremos leer. Existen numerosas opciones. Dependiedo del formato elegido existirán diferentes posibilidades en la instrucción .option(), por ejemplo, epara los ficheros de tipo csv se suele utilizar .option("header", "true") y .option("inferSchema", "true"). Las diferentes posibilidades se pueden consultar en la docuentación oficial de pyspark: https://spark.apache.org/docs/latest/sql-data-sources.html. La instrucción load es la encargada de crear el dataframe y dy en la que se indica la ruta del fichero base.
+En la instrucción read.format() se indica el formato de tabla que queremos leer. Existen numerosas opciones. Dependiedo del formato elegido existirán diferentes posibilidades en la instrucción .option(), por ejemplo, para los ficheros de tipo csv se suele utilizar .option("header", "true") y .option("inferSchema", "true"). Las diferentes posibilidades se pueden consultar en la docuentación oficial de pyspark: https://spark.apache.org/docs/latest/sql-data-sources.html. La instrucción load es la encargada de crear el dataframe y dy en la que se indica la ruta del fichero base.
 
 Otra de las formas más comunes crear una dataframe es desde una tabla de pyspark:
 ```python
