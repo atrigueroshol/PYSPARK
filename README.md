@@ -79,7 +79,7 @@ df_schema = StructType([
     StructField("column_name", IntegerType())
 ])
 ```
-Como podemos ver en el ejemplo primero es importar los tipos qu necesitamos para nuestro schema y a continuación defiimos nuestro schema. Debemos incluir el schema en la creación de nuestro dataframe:
+Como podemos ver en el ejemplo primero es importar los tipos que necesitamos para nuestro schema y a continuación definimos nuestro schema. Debemos incluir el schema en la creación de nuestro dataframe:
 ```python
 df = (
     spark.read.format("csv/json/...")
@@ -113,6 +113,7 @@ new_df = (
     })
 )
 ```
+*En las expresiones solo se puede hacer referencia a una columna nueva si se esta creando una columna nueva, si se utiliza para modificar una columna ya existente dará error. *
 
 Para renombrar una o varias columnas utilizaremos withColumnsRenamed()
 ``` python
