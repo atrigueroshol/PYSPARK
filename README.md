@@ -113,7 +113,7 @@ new_df = (
     })
 )
 ```
-*En las expresiones solo se puede hacer referencia a una columna nueva si se esta creando una columna nueva, si se utiliza para modificar una columna ya existente dará error. *
+*En las expresiones solo se puede hacer referencia a una columna nueva si se esta creando una columna nueva, si se utiliza para modificar una columna ya existente dará error.*
 
 Para renombrar una o varias columnas utilizaremos withColumnsRenamed()
 ``` python
