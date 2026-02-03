@@ -57,6 +57,16 @@ Otra de las formas más comunes crear una dataframe es desde una tabla de pyspar
 ```python
 df = spark.table("table_path")
 ```
+También existe la posibilidad de crear un dataframe a partir de una lista creada por nosotros mismos. Esta forma de crear dataframes es muy útil para hacer pruebas en nuestro código.
+```python
+schema = "id int, name string, age short, salary double"
+
+data_list = [(100, "Alberto", 45, 45000),
+             (101, "Sergio", 36, 33000),
+             (102, "Juan", 48, 28000)]
+
+sample_df = spark.createDataFrame(data=data_list, schema=schema)
+```
 Siempre que creamos un dataframe se recomienda definir un schema para evitar errores y acelerar la carga de datos. La definición de los Schemas se hace de la siguiente forma:
 ```python
 from pyspark.sql.types import StringType, LongType, IntegerType, DateType, StructType, StructField
