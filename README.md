@@ -100,7 +100,7 @@ En pyspark existen diferentes tipos de transformaciones.
 
 Para crear o modificar una columna de un dataframe utilizaremos la función withColumn().
 ``` python
-new_df = old_df.withColumn("newcolumn", expression)
+new_df = old_df.withColumn("newcolumn", expr("SQL expression"))
 ```
 Para crear o modificar varias columnas de un dataframe utilizaremos withColumns()
 ```python
