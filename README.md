@@ -96,6 +96,38 @@ En PySpark existen dos tipos de operaciones:
 Uno de los aspectos más importantes de Spark es “perezoso” (lazy evaluation). Cuando se realizá transformaciones, Spark no procesa los datos aún, solo los registra en un grafo de ejecución. Cuando se realizá la acción, Spark procesa todas las transformaciones necesarias para producir el resultado.
 
 ## 5 Transformaciones
+En pyspark existen diferentes tipos de transformaciones.
+
+Para crear o modificar una columna de un dataframe utilizaremos la función withColumn().
+``` python
+new_df = old_df.withColumn("newcolumn", expression)
+```
+Para crear o modificar varias columnas de un dataframe utilizaremos withColumns()
+```python
+from pyspark.sql.functions import expr
+
+new_df = (
+    old_df.withColumns({
+        "newcolumn": expr("SQL expression"),
+        "modifycolumn": expr("SQL expression")
+    })
+)
+```
+
+Para renombrar una o varias columnas utilizaremos withColumnsRenamed()
+``` python
+new_df = (
+    old_df.withColumnsRenamed({
+        "oldcolumn_1": "newcolumn_1",
+        "oldcolumn_2": "newcolumn_2"
+    })
+)
+```
+
+Para eliminar un columna utilizaremos la funcion drop()
+```python
+new_df = old_df.drop("column")
+```
 
 
 
