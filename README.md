@@ -96,13 +96,15 @@ En PySpark existen dos tipos de operaciones:
 Uno de los aspectos más importantes de Spark es “perezoso” (lazy evaluation). Cuando se realizá transformaciones, Spark no procesa los datos aún, solo los registra en un grafo de ejecución. Cuando se realizá la acción, Spark procesa todas las transformaciones necesarias para producir el resultado.
 
 ## 5 Transformaciones
-En pyspark existen diferentes tipos de transformaciones.
+En pyspark existen diferentes tipos de transformaciones. Recoradmos que cuando se aplica una transformación a un DataFrame se crea uno nuevo.
 
-Para crear o modificar una columna de un dataframe utilizaremos la función withColumn().
+### Creación y modificación de columnas de un DataFrame
+
+Para crear o modificar una columna de un dataframe utilizaremos la función **withColumn()**.
 ``` python
 new_df = old_df.withColumn("newcolumn", expr("SQL expression"))
 ```
-Para crear o modificar varias columnas de un dataframe utilizaremos withColumns()
+Para crear o modificar varias columnas de un dataframe utilizaremos **withColumns()**
 ```python
 from pyspark.sql.functions import expr
 
@@ -113,9 +115,20 @@ new_df = (
     })
 )
 ```
+Otra de las formas de crear una nueva columna o modificar las ya existentes es utilizando **selectExpr()**.  Esta función solo mantiene en el DataFrame las columnas especificadas en ella.
+```python
+new_df = (
+	old_df.selectExpr(
+		"old_column as new_column_1",
+		"SQL expresion old_column as new_column_2"
+	)
+)
+```
+
 *En las expresiones solo se puede hacer referencia a una columna nueva si se esta creando una columna nueva, si se utiliza para modificar una columna ya existente dará error.*
 
-Para renombrar una o varias columnas utilizaremos withColumnsRenamed()
+### Renombrar columnas de un Dataframe
+Para renombrar una o varias columnas utilizaremos **withColumnsRenamed()**
 ``` python
 new_df = (
     old_df.withColumnsRenamed({
@@ -124,11 +137,22 @@ new_df = (
     })
 )
 ```
-
-Para eliminar un columna utilizaremos la funcion drop()
+### Eliminar columnas de un Dataframe
+Para eliminar un columna utilizaremos la funcion **drop()**
 ```python
 new_df = old_df.drop("column")
 ```
+### Filtrar columnas de un Dataframe
+Para filtrar columnas de un dataframe se utilizan las funciones **filter()** o **where()**. Ambas funciones hacen lo mismo.
+```python
+new_df = old_df.filter(column condition)
+```
+### Eliminar Duplicados
+Si se quieren eiminar todos los duplicados del dataframe se debe utilizar la función distinct().
+```python
+new_df = old_df.distinct()
+```
+Si se quieren elimina
 
 
 
