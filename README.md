@@ -148,11 +148,26 @@ Para filtrar columnas de un dataframe se utilizan las funciones **filter()** o *
 new_df = old_df.filter(column condition)
 ```
 ### Eliminar Duplicados
-Si se quieren eiminar todos los duplicados del dataframe se debe utilizar la función distinct().
+Si se quieren eliminar todos los duplicados del DataFrame, se debe utilizar la función **distinct**().
 ```python
 new_df = old_df.distinct()
 ```
-Si se quieren elimina
+Si se quieren eliminar duplicados especificando las columnas, se debe utilizar la función **dropDuplicates()**.
+```python
+new_df = old_df.dropDuplicates(["column_1", "column_2"])
+```
+En este caso, si en new_df hay dos registros con los mismos valores en column_1 y column_2, pero con valores distintos en column_3, la función conservará uno de ellos, sin garantizar cuál, a menos que el DataFrame esté previamente ordenado (se queda con el primero que encuentra).
+
+### Ordenar los registros
+Para ordenar los registros se utiliza la función orderBy(). Por defecto ordena de forma scendiente.
+```python
+new_df = old_df.orderBy("column_1", ascending=True/False)
+```
+### Limitar el número de registros
+Para restringir el número de registros del dataframe se utilizá la función **limit()**.
+```python
+new_df = old_df.limit(n)
+```
 
 
 
