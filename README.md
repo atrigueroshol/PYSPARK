@@ -168,6 +168,30 @@ Para restringir el número de registros del dataframe se utilizá la función **
 ```python
 new_df = old_df.limit(n)
 ```
+### Tipos de Joins
+Para hacer joins en pyspark debemos cargar los dataframes que queremos unir y asignarles un alias. Además debemos definir mediante una expresión los campos por los que realizar la unión. La expresión se puede escribir utilizando col() o expr().
+```python
+from pyspark.sql.functions import expr, col
+
+df_1= spark.table("path_1").alias("m")
+df_2= spark.table("path_1").alias("b")
+
+#join_expr = expr("m.column == b.column")
+join_expr =  col("m.column ") ==  col("b.column")
+```
+#### INNER JOIN
+```python
+new_df = df_1.join(df_2, join_expr, "inner")
+```
+#### OUTER JOINS
+```python
+new_df = df_1.join(df_2, join_expr, "left")
+```
+```python
+new_df = df_1.join(df_2, join_expr, "right")
+```
+```python
+new_df = df_1.join(df_2, join_expr, "full")
 
 
 
