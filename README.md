@@ -192,6 +192,29 @@ new_df = df_1.join(df_2, join_expr, "right")
 ```
 ```python
 new_df = df_1.join(df_2, join_expr, "full")
+```
+### Agregaciones
+PySpark tiene muchas funciones de agregación y las podemos encontrar en la documentación oficial [funciones de agregación](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/grouping.html).
+
+Ejemplo de funciones de agregación simple:
+
+``` python
+from pyspark.sql import functions as F
+
+new_df = old_df.select(
+    F.sum("column_1").alias("total_column_1"),
+    F.avg("column_2").alias("media_column_2"),
+    F.max("column_3").alias("max_column_3"),
+    F.min("column_4").alias("min_column_4"),
+    F.count("column_5").alias("num_column_5")
+)
+```
+Lo más común es combinar funciones de agregación con groupBy(). 
+```python
+new_df = old_df.groupBy("column_1").agg(
+    F.sum("column_2").alias("total_column_2")
+)
+```
 
 
 
