@@ -221,7 +221,7 @@ new_df = old_df.groupBy("column_1").agg(
     F.sum("column_2").alias("total_column_2")
 )
 ```
-## 5 Acciones
+## 6 Acciones
 
 Las acciones son operaciones disparan la ejecución del DAG (las transformaciones). Las acciones más utlizadas son las siguientes:
 
