@@ -51,7 +51,14 @@ df = (
         .load(path="/Volumes/.../.../file.csv")
 )
 ```
-En la instrucción read.format() se indica el formato de tabla que queremos leer. Existen numerosas opciones. Dependiedo del formato elegido existirán diferentes posibilidades en la instrucción .option(), por ejemplo, para los ficheros de tipo csv se suele utilizar .option("header", "true") y .option("inferSchema", "true"). Las diferentes posibilidades se pueden consultar en la docuentación oficial de pyspark: https://spark.apache.org/docs/latest/sql-data-sources.html. La instrucción load es la encargada de crear el dataframe y dy en la que se indica la ruta del fichero base.
+En la instrucción `read.format()` se especifica el formato del archivo que queremos leer. Dependiendo del formato elegido, se pueden utilizar distintas opciones mediante `.option()`. Por ejemplo, en archivos de tipo CSV es común emplear:
+```python
+.option("header", "true")
+.option("inferSchema", "true")
+```
+Para conocer todas las opciones disponibles según el formato de archivo, puedes consultar la documentación oficial de PySpark: [Data Sources](https://spark.apache.org/docs/latest/sql-data-sources.html).
+
+La instrucción `load()` se encarga de crear el DataFrame y recibe como argumento la ruta del archivo base.
 
 Otra de las formas más comunes crear una dataframe es desde una tabla de pyspark:
 ```python
@@ -79,7 +86,7 @@ df_schema = StructType([
     StructField("column_name", IntegerType())
 ])
 ```
-Como podemos ver en el ejemplo primero es importar los tipos que necesitamos para nuestro schema y a continuación definimos nuestro schema. Debemos incluir el schema en la creación de nuestro dataframe:
+Como podemos ver en el ejemplo, primero se importan los tipos necesarios para definir nuestro schema y, a continuación, se procede a crearlo. Es importante incluir este schema al momento de crear el DataFrame.
 ```python
 df = (
     spark.read.format("csv/json/...")
@@ -93,10 +100,10 @@ En PySpark existen dos tipos de operaciones:
 - Transformaciones: operación que define un nuevo DataFrame o RDD a partir de otro, pero no ejecuta nada todavía. Spark solo construye un plan de ejecución.
 - Acciones: operación que ejecuta realmente el plan de Spark y devuelve un resultado concreto (como contar filas, mostrar datos, guardar archivos, etc.).
 
-Uno de los aspectos más importantes de Spark es “perezoso” (lazy evaluation). Cuando se realizá transformaciones, Spark no procesa los datos aún, solo los registra en un grafo de ejecución. Cuando se realizá la acción, Spark procesa todas las transformaciones necesarias para producir el resultado.
+Uno de los aspectos más importantes de Spark es su evaluación perezosa (_lazy evaluation_). Cuando se realizan transformaciones, Spark no procesa los datos de inmediato, sino que solo las registra en un grafo de ejecución. Es únicamente al ejecutar una acción cuando Spark procesa todas las transformaciones necesarias para producir el resultado
 
 ## 5 Transformaciones
-En pyspark existen diferentes tipos de transformaciones. Recoradmos que cuando se aplica una transformación a un DataFrame se crea uno nuevo.
+En PySpark existen diferentes tipos de transformaciones. Recordemos que, al aplicar una transformación a un DataFrame, se crea un nuevo DataFrame sin modificar el original.
 
 ### Creación y modificación de columnas de un DataFrame
 
@@ -110,8 +117,8 @@ from pyspark.sql.functions import expr
 
 new_df = (
     old_df.withColumns({
-        "newcolumn": expr("SQL expression"),
-        "modifycolumn": expr("SQL expression")
+        "newcolumn": expr("SQL expression") or PySpark condition,
+        "modifycolumn": expr("SQL expression") or PySpark condition
     })
 )
 ```
@@ -176,7 +183,6 @@ from pyspark.sql.functions import expr, col
 df_1= spark.table("path_1").alias("m")
 df_2= spark.table("path_1").alias("b")
 
-#join_expr = expr("m.column == b.column")
 join_expr =  col("m.column ") ==  col("b.column")
 ```
 #### INNER JOIN
@@ -215,7 +221,33 @@ new_df = old_df.groupBy("column_1").agg(
     F.sum("column_2").alias("total_column_2")
 )
 ```
+## 5 Acciones
 
+Las acciones son operaciones disparan la ejecución del DAG (las transformaciones). Las acciones más utlizadas son las siguientes:
 
-
+#### Display()
+Muestra los datos de un DataFrame de manera visual y tabular. Sirve para inspeccionar los datos rápidamente en un notebook.
+```python
+df.display()
+```
+#### Collect()
+Devuelve todos los registros de un RDD o DataFrame al driver. Sirve para la inspección completa de los datos. **Se debe tener cuidado con los datos de gran tamaño**.
+```python
+df.collect()
+```
+#### Take()
+Devuelve los n primeros elementos al driver. Sirve para explorar parte del dataset
+```python
+df.take(n)
+```
+#### First()
+Devuelve el primer elemento del dataframe.
+```python
+df.first()
+```
+#### Count()
+Devuelve el número de resgistros del dataframe.
+```python
+df.count()
+```
 
