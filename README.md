@@ -250,4 +250,34 @@ Devuelve el número de resgistros del dataframe.
 ```python
 df.count()
 ```
+## 7 Arquitectura de SPARK
 
+Spark es una plataforma de computación distribuida. Spark necesita un cluster aunque se puede correr en local para desarrollo y pruebas. 
+
+Las tecnologías para clusters de spark son las siguientes:
+- **Hadoop YARN**
+- **Kubernetes**
+- Apache Mesos
+- Spark Standalone
+
+Un cluster es un conjunto de máquinas que trabajan juntas. A las maquinas de un cluster se las conoce como nodos y pueden tener dos tipos de roles:
+
+ - Master Nodes: Son los nodos encargados de gestión, coordinación y asignación de recursos dentro del cluster.
+ - Worker Nodes: Ejecutan las aplicaciones y tareas del usuario.
+
+En SPARK se tiene un Master Node en el que se ejecuta el **ResourceManager**, que se encarga de administrar y asignar los recursos del cluster.
+
+Los **Worker Nodes** ejecutan un **NodeManager** y pueden lanzar **contenedores** cuando una aplicación lo solicita. Un contenedor es una asignación de recursos de la máquina (CPU, memoria).
+
+Para cada aplicación, **uno de los contenedores ejecutará el ApplicationMaster**, que a su vez contiene el **Driver** de Spark, donde se ejecuta el “main” de la aplicación. El Driver es el proceso encargado de coordinar la aplicación: construye el plan de ejecución (DAG), solicita recursos al **ResourceManager** y distribuye las tareas a los **Executors**.
+
+Los demás contenedores lanzados en los Worker Nodes ejecutan los **Executors**, que procesan las tareas en paralelo sobre los datos
+
+```scss
+Cluster
+├─ Master Node (ResourceManager)
+└─ Worker Nodes (NodeManager)
+    └─ Contenedores
+        ├─ Driver (coordina)
+        └─ Executors (ejecutan tareas)
+```
