@@ -281,3 +281,7 @@ Cluster
         ├─ Driver (coordina)
         └─ Executors (ejecutan tareas)
 ```
+Spark se puede desplegar de dos modos diferentes:
+
+ - Cluster Mode: El diver se encuentra en el cluster. Se utiliza para proyectos en producción ya que elimina la dependencia de la maquina cliente y mejora el rendimiento de la aplicación.
+ - Client Mode: El driver se encuentra en la maquina del cliente. Se utiliza desarrollo testing y debugging ya que puedes ver los logs del driver en la terminal.
