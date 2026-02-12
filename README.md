@@ -304,4 +304,4 @@ El Job se divide en **Stages**, donde cada Stage está delimitado por una operac
 Dentro de cada Stage se ejecutan múltiples **Tasks**, una por cada partición de datos, las cuales se ejecutan en paralelo.
 
 Ejemplo: 
-![Texto alternativo](https://github.com/atrigueroshol/PYSPARK/blob/main/jobs_stages.png?raw=true)
+![Texto alternativo](https://github.com/atrigueroshol/PYSPARK/blob/main/jobs_stages.drawio.png?raw=true)
