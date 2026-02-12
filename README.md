@@ -285,3 +285,23 @@ Spark se puede desplegar de dos modos diferentes:
 
  - Cluster Mode: El diver se encuentra en el cluster. Se utiliza para proyectos en producción ya que elimina la dependencia de la maquina cliente y mejora el rendimiento de la aplicación.
  - Client Mode: El driver se encuentra en la maquina del cliente. Se utiliza desarrollo testing y debugging ya que puedes ver los logs del driver en la terminal.
+ - 
+
+ Como ya sabemos, en PySpark tenemos dos tipos de operaciones:
+
+- Transformaciones
+  - Narrow (estrechas): No requieren shuffle y pueden ejecutarse en paralelo
+    sobre las particiones existentes. Ej: select, filter, map.
+  - Wide (amplias): Requieren un shuffle de datos entre particiones.
+    Ej: groupBy, join, reduceByKey.
+
+- Acciones
+
+Cada acción en el código dispara un **Job** en Spark.  A partir del DAG de transformaciones, el driver construye un **plan lógico** y luego un **plan físico**. 
+
+El Job se divide en **Stages**, donde cada Stage está delimitado por una operación de **shuffle** (es decir, por transformaciones wide).
+
+Dentro de cada Stage se ejecutan múltiples **Tasks**, una por cada partición de datos, las cuales se ejecutan en paralelo.
+
+Ejemplo: 
+![Texto alternativo](https://github.com/atrigueroshol/PYSPARK/blob/main/jobs_stages.png?raw=true)
