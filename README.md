@@ -306,3 +306,19 @@ Dentro de cada Stage se ejecutan múltiples **Tasks**, una por cada partición d
 Ejemplo: 
 
 ![Texto alternativo](https://github.com/atrigueroshol/PYSPARK/blob/main/jobs_stages.drawio.png?raw=true)
+
+```scss
+Job - 01 - Stage 1 
+ ├── FileScan csv (read)
+ ├── Filter (edad > 18)
+ └── Select (pais, salario)
+ 
+ Job - 02 - Stage 1
+ └── groupBy(pais).avg(salario)
+     (shuffle)
+     
+ Job - 02 - Stage 2
+ └── Join(df_group, df_sel)
+     (shuffle)
+```
+El número de tasks en cada stage depende del número de particiones que cree spark. 
